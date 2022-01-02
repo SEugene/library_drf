@@ -12,7 +12,8 @@ class LibraryUser(AbstractBaseUser, PermissionsMixin):
     lastname = models.CharField(_('surname'), max_length=30, blank=True)
     email = models.EmailField(_('email'), unique=True)
     is_active = models.BooleanField(_('is_active'), default=True)
-    
+    is_staff = models.BooleanField(_('is_staff'), default=False)
+        
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'username'
