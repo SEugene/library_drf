@@ -4,5 +4,5 @@ from .serializers import LibraryUserModelSerializer
 
 
 class LibraryUserModelViewSet(ModelViewSet):
-   queryset = LibraryUser.objects.all()
-   serializer_class = LibraryUserModelSerializer
+    queryset = LibraryUser.objects.all()
+    serializer_class = LibraryUserModelSerializer

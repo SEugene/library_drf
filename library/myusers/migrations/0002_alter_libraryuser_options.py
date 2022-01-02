@@ -5,13 +5,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('myusers', '0001_initial'),
-    ]
+    dependencies = [("myusers", "0001_initial")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='libraryuser',
-            options={'verbose_name': 'libraryuser', 'verbose_name_plural': 'libraryusers'},
-        ),
+            name="libraryuser", options={"verbose_name": "libraryuser", "verbose_name_plural": "libraryusers"}
+        )
     ]

@@ -5,14 +5,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('myusers', '0002_alter_libraryuser_options'),
-    ]
+    dependencies = [("myusers", "0002_alter_libraryuser_options")]
 
     operations = [
         migrations.AddField(
-            model_name='libraryuser',
-            name='is_staff',
-            field=models.BooleanField(default=True, verbose_name='is_staff'),
-        ),
+            model_name="libraryuser", name="is_staff", field=models.BooleanField(default=True, verbose_name="is_staff")
+        )
     ]

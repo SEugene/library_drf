@@ -5,11 +5,11 @@ from authors.views import AuthorModelViewSet
 from myusers.views import LibraryUserModelViewSet
 
 router = DefaultRouter()
-router.register('authors', AuthorModelViewSet)
-router.register('libraryusers', LibraryUserModelViewSet)
+router.register("authors", AuthorModelViewSet)
+router.register("libraryusers", LibraryUserModelViewSet)
 
 urlpatterns = [
-   path('admin/', admin.site.urls),
-   path('api-auth/', include('rest_framework.urls')),
-   path('api/', include(router.urls)),
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
+    path("api/", include(router.urls)),
 ]
