@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import LibraryUser
+
+@admin.register(LibraryUser)
+class PersonAdmin(admin.ModelAdmin):
+    pass
