@@ -3,14 +3,17 @@ import React from 'react';
 import './App.css';
 import axios from 'axios'
 import AuthorList from './components/Author.js'
-
+import LibraryUserList from './components/MyUser.js'
+import Header from './components/Header.js'
+import Footer from './components/Footer.js'
 
 class App extends React.Component {
 
    constructor(props) {
        super(props)
        this.state = {
-           'authors': []
+           'authors': [],
+           'libraryusers': [],
        }
    }
 
@@ -24,12 +27,26 @@ class App extends React.Component {
                 }
             )
         }).catch(error => console.log(error))
+
+
+        axios.get('http://127.0.0.1:8000/api/libraryusers')
+        .then(response => {
+            const libraryusers = response.data
+                this.setState(
+                {
+                    'libraryusers': libraryusers
+                }
+            )
+        }).catch(error => console.log(error))
  }
 
    render () {
        return (
            <div>
-               <AuthorList authors={this.state.authors} />
+              <Header />
+              <AuthorList authors={this.state.authors} />
+              <LibraryUserList libraryusers={this.state.libraryusers} />
+              <Footer />
            </div>
        )
    }
