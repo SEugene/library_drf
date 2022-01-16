@@ -12,29 +12,32 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('myusers', '0004_alter_libraryuser_is_staff'),
+        ("myusers", "0004_alter_libraryuser_is_staff"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Project',
+            name="Project",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('project_name', models.CharField(max_length=64, unique=True)),
-                ('repository', models.URLField(blank=True)),
-                ('project_users', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
+                ("uuid", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ("project_name", models.CharField(max_length=64, unique=True)),
+                ("repository", models.URLField(blank=True)),
+                ("project_users", models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
-            name='ToDo',
+            name="ToDo",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('todo_text', models.TextField()),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='todoapp.project')),
-                ('todo_author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='myusers.libraryuser')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("todo_text", models.TextField()),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                ("is_active", models.BooleanField(default=True)),
+                ("project", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="todoapp.project")),
+                (
+                    "todo_author",
+                    models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to="myusers.libraryuser"),
+                ),
             ],
         ),
     ]
