@@ -9,7 +9,7 @@ router = DefaultRouter()
 router.register("authors", AuthorModelViewSet)
 router.register("libraryusers", LibraryUserModelViewSet)
 router.register("projects", ProjectViewSet)
-router.register("todo", ToDoViewSet)
+router.register("todos", ToDoViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
