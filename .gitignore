@@ -241,3 +241,4 @@ fabric.properties
 *.vsix
 
 .tmp/
+node_modules
