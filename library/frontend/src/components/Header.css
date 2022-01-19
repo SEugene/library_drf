@@ -1,0 +1,23 @@
+.headermenu {
+    height: 100px;
+    background-color: #87CEEB;
+    color: #000080;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    height: 100px;
+    background-color: #000080;
+    color: #87CEEB;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 30px;
+    display: flex;
+    justify-content:left;
+    align-items: center;
+}
