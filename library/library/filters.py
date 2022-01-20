@@ -5,21 +5,21 @@ from todoapp.models import Project, ToDo
 
 
 class AuthorFilter(filters.FilterSet):
-    first_name = filters.CharFilter(lookup_expr='contains')
-    last_name = filters.CharFilter(lookup_expr='contains')
-    birthday_year = filters.CharFilter(lookup_expr='contains')
+    first_name = filters.CharFilter(lookup_expr="contains")
+    last_name = filters.CharFilter(lookup_expr="contains")
+    birthday_year = filters.CharFilter(lookup_expr="contains")
 
     class Meta:
         model = Author
-        fields = ['first_name', 'last_name', 'birthday_year']
+        fields = ["first_name", "last_name", "birthday_year"]
 
 
 class ProjectFilter(filters.FilterSet):
-    project_name = filters.CharFilter(lookup_expr='contains')
+    project_name = filters.CharFilter(lookup_expr="contains")
 
     class Meta:
         model = Project
-        fields = ['project_name']
+        fields = ["project_name"]
 
 
 class ToDoFilter(filters.FilterSet):
@@ -29,4 +29,4 @@ class ToDoFilter(filters.FilterSet):
 
     class Meta:
         model = ToDo
-        fields = ['project_id', 'created', 'updated']
+        fields = ["project_id", "created", "updated"]

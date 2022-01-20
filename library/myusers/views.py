@@ -4,14 +4,14 @@ from .serializers import LibraryUserModelSerializer
 from rest_framework import mixins
 
 
-'''class LibraryUserModelViewSet(ModelViewSet):
+"""class LibraryUserModelViewSet(ModelViewSet):
     queryset = LibraryUser.objects.all()
-    serializer_class = LibraryUserModelSerializer'''
+    serializer_class = LibraryUserModelSerializer"""
 
-class LibraryUserModelViewSet(mixins.ListModelMixin,
-                          mixins.RetrieveModelMixin, 
-                          mixins.UpdateModelMixin, 
-                          GenericViewSet):
 
-   queryset = LibraryUser.objects.all()
-   serializer_class = LibraryUserModelSerializer
+class LibraryUserModelViewSet(
+    mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, GenericViewSet
+):
+
+    queryset = LibraryUser.objects.all()
+    serializer_class = LibraryUserModelSerializer

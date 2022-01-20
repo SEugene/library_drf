@@ -10,11 +10,12 @@ from library.filters import ProjectFilter, ToDoFilter
 
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
-   default_limit = 10
+    default_limit = 10
 
 
 class ToDoLimitOffsetPagination(LimitOffsetPagination):
-   default_limit = 20
+    default_limit = 20
+
 
 class ProjectViewSet(ModelViewSet):
     serializer_class = ProjectSerializer
@@ -23,12 +24,14 @@ class ProjectViewSet(ModelViewSet):
     pagination_class = ProjectLimitOffsetPagination
 
 
-class ToDoViewSet(mixins.CreateModelMixin,
-                   mixins.RetrieveModelMixin,
-                   mixins.UpdateModelMixin,
-                   #mixins.DestroyModelMixin,
-                   mixins.ListModelMixin,
-                   GenericViewSet):
+class ToDoViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    # mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet,
+):
     serializer_class = ToDoSerializer
     queryset = ToDo.objects.all()
     pagination_class = ToDoLimitOffsetPagination
