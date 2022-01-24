@@ -5,6 +5,9 @@ import axios from 'axios'
 import ProjectList from './components/Project.js'
 import TodoList from './components/Todo.js'
 import LibraryUserList from './components/MyUser.js'
+import ToDoProjectList from './components/ToDoProject.js'
+
+import {HashRouter, Route, Routes, Link, Navigate} from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -54,9 +57,33 @@ class App extends React.Component {
        return (
            <div>
 
-              <LibraryUserList libraryusers={this.state.libraryusers} />
-              <ProjectList projects={this.state.projects} />
-              <TodoList todos={this.state.todos} />
+        <HashRouter>
+          <nav>
+            <ul>
+              <li>
+                <Link to='/users'>Users</Link>
+              </li>
+              <li>
+                <Link to='/projects'>Projects</Link>
+              </li>
+              <li>
+                <Link to='/todos'>ToDos</Link>
+              </li>
+            </ul>
+          </nav>
+          
+          <Routes>  
+            <Route path='/users' element={<LibraryUserList libraryusers={this.state.libraryusers} />}  />
+            <Route path='/projects' element={<ProjectList projects={this.state.projects} />} />
+            <Route path='/todos' element={<TodoList todos={this.state.todos} />} />
+            <Route path='/projects/:id' element={<ToDoProjectList items={this.state.projects} />} />
+            <Route path="*" element={<Navigate to="/users" />}  />
+            
+            
+          </Routes> 
+
+          
+        </HashRouter>
 
            </div>
        )

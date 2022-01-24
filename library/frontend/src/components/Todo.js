@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 const TodoItem = ({todo}) => {
    return (
        <tr>
            <td>
-               {todo.project}
+               <Link to={`/projects/${todo.project}`}>{todo.project}</Link>
            </td>
            <td>
                {todo.todoText}
