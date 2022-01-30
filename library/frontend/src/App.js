@@ -47,6 +47,7 @@ class App extends React.Component {
   get_token(username, password) {
     axios.post('http://127.0.0.1:8000/api-token-auth/', {username: username, password: password})
     .then(response => {
+        
         this.set_token(response.data['token'])
     }).catch(error => alert('Wrong login or password'))
   };
@@ -68,6 +69,7 @@ class App extends React.Component {
     axios.get('http://127.0.0.1:8000/api/projects/', {headers})
         .then(response => {
             this.setState({projects: response.data.results})
+
         }).catch(error => 
           console.log(error))
           this.setState({projects: []})
@@ -87,7 +89,7 @@ class App extends React.Component {
           console.log(error)
           this.setState({todos: []})
         })
-  }
+  };
 
   componentDidMount() {
     this.get_token_from_storage()
