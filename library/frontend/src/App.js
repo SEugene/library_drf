@@ -20,14 +20,16 @@ class App extends React.Component {
            projects: [],
            libraryusers: [],
            todos: [],
-           'token': ''
+           'token': '',
+           'current_user': 'anonim'
        }
    };
 
-  set_token(token) {
+  set_token(token, username) {
     const cookies = new Cookies()
     cookies.set('token', token)
     this.setState({'token': token}, ()=>this.load_data())
+    cookies.set('current_user', username)
   };
 
   is_authenticated() {
@@ -35,20 +37,21 @@ class App extends React.Component {
   };
 
   logout() {
-    this.set_token('')
+    this.set_token('', 'anonim')
   };
 
   get_token_from_storage() {
     const cookies = new Cookies()
     const token = cookies.get('token')
-    this.setState({'token': token}, ()=>this.load_data())
+    const current_user = cookies.get('current_user')
+    //this.setState({'current_user': current_user})
+    this.setState({'token': token, 'current_user': current_user}, ()=>this.load_data())
   };
 
   get_token(username, password) {
     axios.post('http://127.0.0.1:8000/api-token-auth/', {username: username, password: password})
-    .then(response => {
-        
-        this.set_token(response.data['token'])
+    .then(response => {        
+        this.set_token(response.data['token'], username)
     }).catch(error => alert('Wrong login or password'))
   };
 
@@ -114,6 +117,7 @@ class App extends React.Component {
               <li>
                 {this.is_authenticated() ? <button onClick={()=>this.logout()}>Logout</button> : <Link to='/login'>Login</Link>}
               </li>
+              <p> {this.state.current_user} </p>
             </ul>
           </nav>
           
