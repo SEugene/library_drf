@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework import mixins
+from rest_framework import mixins, permissions
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 
@@ -18,6 +18,7 @@ class ToDoLimitOffsetPagination(LimitOffsetPagination):
 
 
 class ProjectViewSet(ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = ProjectSerializer
     queryset = Project.objects.all()
     filterset_class = ProjectFilter
@@ -32,6 +33,7 @@ class ToDoViewSet(
     mixins.ListModelMixin,
     GenericViewSet,
 ):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = ToDoSerializer
     queryset = ToDo.objects.all()
     pagination_class = ToDoLimitOffsetPagination

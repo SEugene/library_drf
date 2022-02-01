@@ -1,47 +1,54 @@
 import React from 'react';
-import useStateIfMounted from 'react';
 //import logo from './logo.svg';
+import axios from 'axios';
+import {BrouserRouter, Route, Routes, Link, Navigate} from 'react-router-dom';
+
 import './App.css';
-import axios from 'axios'
-import AuthorList from './components/Author.js'
-import LibraryUserList from './components/MyUser.js'
-import Header from './components/Header.js'
-import Footer from './components/Footer.js'
+import ProjectList from './components/Project.js';
+import TodoList from './components/Todo.js';
+import LibraryUserList from './components/MyUser.js';
+import ToDoProjectList from './components/ToDoProject.js';
+
 
 class App extends React.Component {
 
    constructor(props) {
        super(props)
        this.state = {
-           'authors': [],
-           'libraryusers': [],
+           projects: [],
+           libraryusers: [],
+           todos: [],
        }
-       
    }
 
    componentDidMount() {
-    
-    
-    //let isMounted = true;
-    axios.get('http://127.0.0.1:8000/api/authors')
+    axios.get('http://127.0.0.1:8000/api/projects')
         .then(response => {
-            let [authors] = useStateIfMounted("waiting...");
-            authors = response.data
+            //const projects = response.data
                 this.setState(
                 {
-                    'authors': authors
+                    projects: response.data.results
                 }
             )
         }).catch(error => console.log(error))
 
-        
+
         axios.get('http://127.0.0.1:8000/api/libraryusers')
         .then(response => {
-            let [libraryusers] = useStateIfMounted("waiting...");
-            libraryusers = response.data
+            //const libraryusers = response.data
                 this.setState(
                 {
-                    'libraryusers': libraryusers
+                    libraryusers: response.data.results
+                }
+            )
+        }).catch(error => console.log(error))
+
+        axios.get('http://127.0.0.1:8000/api/todos')
+        .then(response => {
+            //const todos = response.data
+                this.setState(
+                {
+                    todos: response.data.results
                 }
             )
         }).catch(error => console.log(error))
@@ -50,10 +57,35 @@ class App extends React.Component {
    render () {
        return (
            <div>
-              <Header />
-              <AuthorList authors={this.state.authors} />
-              <LibraryUserList libraryusers={this.state.libraryusers} />
-              <Footer />
+
+        <BrouserRouter>
+          <nav>
+            <ul>
+              <li>
+                <Link to='/users'>Users</Link>
+              </li>
+              <li>
+                <Link to='/projects'>Projects</Link>
+              </li>
+              <li>
+                <Link to='/todos'>ToDos</Link>
+              </li>
+            </ul>
+          </nav>
+          
+          <Routes>  
+            <Route path='/users' element={<LibraryUserList libraryusers={this.state.libraryusers} />}  />
+            <Route path='/projects' element={<ProjectList projects={this.state.projects} />} />
+            <Route path='/todos' element={<TodoList todos={this.state.todos} />} />
+            <Route path='/projects/:id' element={<ToDoProjectList items={this.state.projects} />} />
+            <Route path="*" element={<Navigate to="/users" />}  />
+            
+            
+          </Routes> 
+
+          
+        </BrouserRouter>
+
            </div>
        )
    }
