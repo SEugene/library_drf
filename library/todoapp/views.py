@@ -33,7 +33,7 @@ class ToDoViewSet(
     mixins.ListModelMixin,
     GenericViewSet,
 ):
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
     serializer_class = ToDoSerializer
     queryset = ToDo.objects.all()
     pagination_class = ToDoLimitOffsetPagination
