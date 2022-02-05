@@ -15,9 +15,9 @@ router.register("todos", ToDoViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path('api-token-auth/', views.obtain_auth_token),
+    path("api-token-auth/", views.obtain_auth_token),
     path("api/", include(router.urls)),
-    #re_path(r'^api/(?P<version>\d\.\d)/libraryusers/$', LibraryUserModelViewSet.as_view({'get': 'list'})),
-    path('api/libraryusers/0.1', include('myusers.urls', namespace='0.1')),
-    path('api/libraryusers/0.2', include('myusers.urls', namespace='0.2')),
+    # re_path(r'^api/(?P<version>\d\.\d)/libraryusers/$', LibraryUserModelViewSet.as_view({'get': 'list'})),
+    path("api/libraryusers/0.1", include("myusers.urls", namespace="0.1")),
+    path("api/libraryusers/0.2", include("myusers.urls", namespace="0.2")),
 ]

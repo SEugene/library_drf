@@ -18,6 +18,6 @@ class LibraryUserModelViewSet(
     serializer_class = LibraryUserModelSerializer
 
     def get_serializer_class(self):
-        if self.request.version == '0.2':
+        if self.request.version == "0.2":
             return LibraryUserModelSerializerNew
         return LibraryUserModelSerializer
