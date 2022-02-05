@@ -8,7 +8,7 @@ from todoapp.views import ProjectViewSet, ToDoViewSet
 
 router = DefaultRouter()
 router.register("authors", AuthorModelViewSet)
-router.register("libraryusers", LibraryUserModelViewSet)
+router.register("libraryusers/0.1", LibraryUserModelViewSet)
 router.register("projects", ProjectViewSet)
 router.register("todos", ToDoViewSet)
 
@@ -17,5 +17,7 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
     path('api-token-auth/', views.obtain_auth_token),
     path("api/", include(router.urls)),
-    re_path(r'^api/(?P<version>\d\.\d)/libraryusers/$', LibraryUserModelViewSet.as_view({'get': 'list'})),
+    #re_path(r'^api/(?P<version>\d\.\d)/libraryusers/$', LibraryUserModelViewSet.as_view({'get': 'list'})),
+    path('api/libraryusers/0.1', include('myusers.urls', namespace='0.1')),
+    path('api/libraryusers/0.2', include('myusers.urls', namespace='0.2')),
 ]

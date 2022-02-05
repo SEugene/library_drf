@@ -5,8 +5,8 @@ from .models import LibraryUser
 class LibraryUserModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = LibraryUser
-        #fields = ("url", "username", "firstname", "lastname", "email", "password")
-        fields = ("username", "email")
+        fields = ("url", "username", "firstname", "lastname", "email", "password")
+        #fields = ("username", "email")
 
     
     def create(self, validated_data):
