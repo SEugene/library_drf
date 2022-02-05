@@ -1,11 +1,12 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 from .models import LibraryUser
 
 
 class LibraryUserModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = LibraryUser
-        fields = ("url", "username", "firstname", "lastname", "email", "password")
+        #fields = ("url", "username", "firstname", "lastname", "email", "password")
+        fields = ("username", "email")
 
     
     def create(self, validated_data):
@@ -25,3 +26,9 @@ class LibraryUserModelSerializer(HyperlinkedModelSerializer):
                 setattr(instance, attr, value)
         instance.save()
         return instance
+
+
+class LibraryUserModelSerializerNew(ModelSerializer):
+    class Meta:
+        model = LibraryUser
+        fields = ("username", "email", "is_staff", "is_superuser")
