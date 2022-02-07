@@ -3,20 +3,23 @@ from graphene_django import DjangoObjectType
 from todoapp.models import Project, ToDo
 from myusers.models import LibraryUser
 
+
 class ToDoType(DjangoObjectType):
     class Meta:
         model = ToDo
-        fields = '__all__'
+        fields = "__all__"
+
 
 class ProjectType(DjangoObjectType):
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = "__all__"
+
 
 class LibraryUsersType(DjangoObjectType):
     class Meta:
         model = LibraryUser
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ToDoMutation(graphene.Mutation):
@@ -27,7 +30,7 @@ class ToDoMutation(graphene.Mutation):
     todo = graphene.Field(ToDoType)
 
     @classmethod
-    def mutate (cls, root, info, todo_text, id):
+    def mutate(cls, root, info, todo_text, id):
         todo = ToDo.objects.get(pk=id)
         todo.todo_text = todo_text
         todo.save()
@@ -74,7 +77,6 @@ class Query(graphene.ObjectType):
         if name:
             todos = todos.filter(todo_author__username=name)
         return todos
-
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

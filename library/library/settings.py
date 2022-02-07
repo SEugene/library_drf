@@ -168,8 +168,7 @@ REST_FRAMEWORK = {
 
 import django
 from django.utils.encoding import force_str
+
 django.utils.encoding.force_text = force_str
 
-GRAPHENE = {
-    "SCHEMA": "library.schema.schema"
-}
+GRAPHENE = {"SCHEMA": "library.schema.schema"}
