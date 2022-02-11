@@ -94,6 +94,16 @@ class App extends React.Component {
         })
   };
 
+
+  deleteTodo(id) {
+    const headers = this.get_headers()
+    axios.delete(`http://127.0.0.1:8000/api/todos/${id}`, {headers, headers})
+        .then(response => {
+          this.setState({todos: this.state.todos.filter((todo)=>todo.id !== id)})
+        }).catch(error => console.log(error))
+  }
+
+
   componentDidMount() {
     this.get_token_from_storage()
   }
@@ -124,7 +134,7 @@ class App extends React.Component {
           <Routes>  
             <Route path='/users' element={<LibraryUserList libraryusers={this.state.libraryusers} />}  />
             <Route path='/projects' element={<ProjectList projects={this.state.projects} />} />
-            <Route path='/todos' element={<TodoList todos={this.state.todos} />} />
+            <Route path='/todos' element={<TodoList todos={this.state.todos} deleteTodo={(id)=>this.deleteTodo(id)} />} />
             <Route path='/login' element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} />
             <Route path='/projects/:id' element={<ToDoProjectList items={this.state.projects} />} />
             <Route path="*" element={<Navigate to="/users" />}  />      
