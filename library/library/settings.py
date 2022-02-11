@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "graphene_django",
     "django_filters",
     "rest_framework",
     "rest_framework.authtoken",
@@ -164,3 +165,10 @@ REST_FRAMEWORK = {
     #'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
     #'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
 }
+
+import django
+from django.utils.encoding import force_str
+
+django.utils.encoding.force_text = force_str
+
+GRAPHENE = {"SCHEMA": "library.schema.schema"}
