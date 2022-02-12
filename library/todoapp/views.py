@@ -14,7 +14,7 @@ class ProjectLimitOffsetPagination(LimitOffsetPagination):
 
 
 class ToDoLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 20
+    default_limit = 120
 
 
 class ProjectViewSet(ModelViewSet):
@@ -29,7 +29,7 @@ class ToDoViewSet(
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
-    # mixins.DestroyModelMixin,
+    #mixins.DestroyModelMixin,
     mixins.ListModelMixin,
     GenericViewSet,
 ):

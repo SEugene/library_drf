@@ -28,6 +28,7 @@ const TodoItem = ({todo, deleteTodo}) => {
 
 const TodoList = ({todos, deleteTodo}) => {
     return (
+        <div>
         <table className="table">
             <th>
                 Project name
@@ -48,6 +49,10 @@ const TodoList = ({todos, deleteTodo}) => {
             {todos.map((todo) => <TodoItem todo={todo} deleteTodo={deleteTodo} />)}
             
         </table>
+
+        <Link to='/todos/create'>Create</Link>
+
+        </div>
     )
  }
  

@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import {BrowserRouter, Route, Routes, Link, Navigate} from 'react-router-dom';
+import {v4 as UUID} from 'uuid'
 
 import './App.css';
 import ProjectList from './components/Project.js';
@@ -10,6 +11,8 @@ import TodoList from './components/Todo.js';
 import LibraryUserList from './components/MyUser.js';
 import ToDoProjectList from './components/ToDoProject.js';
 import LoginForm from './components/Auth.js'
+import ToDoForm from './components/ToDoForm.js'
+import ProjectForm from './components/ProjectForm.js'
 
 
 class App extends React.Component {
@@ -113,6 +116,42 @@ class App extends React.Component {
   }
 
 
+  createToDo(project, todoText, todoAuthor) {
+    const headers = this.get_headers()    
+    const data = {project: project, todoText: todoText, todoAuthor: todoAuthor}
+
+    axios.post(`http://127.0.0.1:8000/api/todos/`, data, {headers, headers})
+        .then(response => {          
+          let new_todo = response.data
+          
+          const project = this.state.projects.filter((item) => item.uuid === new_todo.project)[0]
+          new_todo.project = project
+
+          const todoAuthor = this.state.libraryusers.filter((item) => item.id === new_todo.todoAuthor)[0]
+          new_todo.todoAuthor = todoAuthor
+
+          this.setState({todos: [...this.state.todos, new_todo]})
+        }).catch(error => console.log(error))
+  }
+
+
+  createProject(uuid, projectName, projectUsers) {
+    const headers = this.get_headers()
+    uuid = UUID()
+    const data = {uuid, projectName: projectName, projectUsers: [projectUsers]}
+
+    axios.post(`http://127.0.0.1:8000/api/projects/`, data, {headers, headers})
+        .then(response => {          
+          let new_project = response.data
+                             
+          const projectUsers = this.state.libraryusers.filter((item) => item.id === new_project.projectUsers)[0]
+          new_project.projectUsers = projectUsers
+
+          this.setState({projects: [...this.state.projects, new_project]})
+        }).catch(error => console.log(error))
+  }
+
+
   componentDidMount() {
     this.get_token_from_storage()
   }
@@ -146,6 +185,13 @@ class App extends React.Component {
             <Route path='/todos' element={<TodoList todos={this.state.todos} deleteTodo={(id)=>this.deleteTodo(id)} />} />
             <Route path='/login' element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} />
             <Route path='/projects/:id' element={<ToDoProjectList items={this.state.projects} />} />
+            <Route path='/todos/create' element={<ToDoForm project={this.state.projects} todoAuthor={this.state.libraryusers}
+                          createToDo={(project, todoText, todoAuthor) => this.createToDo(project, todoText, todoAuthor)} />} />
+            <Route path='/projects/create' element={<ProjectForm projectUsers={this.state.libraryusers}
+                          createProject={(uuid, projectName, projectUsers) => this.createProject(uuid, projectName, projectUsers)} />} />
+
+
+            
             <Route path="*" element={<Navigate to="/users" />}  />      
           </Routes>
 
