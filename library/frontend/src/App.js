@@ -13,6 +13,7 @@ import ToDoProjectList from './components/ToDoProject.js';
 import LoginForm from './components/Auth.js'
 import ToDoForm from './components/ToDoForm.js'
 import ProjectForm from './components/ProjectForm.js'
+import ProjectSearchForm from './components/ProjectSearchForm.js'
 
 
 class App extends React.Component {
@@ -152,6 +153,25 @@ class App extends React.Component {
   }
 
 
+  searchProject(partedProjectName, filteredData) {
+    const headers = this.get_headers()    
+    
+
+    axios.get('http://127.0.0.1:8000/api/projects/', {headers})
+        .then(response => {
+            
+            const data = response.data.results
+            filteredData = data.filter(element => {
+                  return element.projectName.toLowerCase().includes(partedProjectName.toLowerCase());
+                   });
+            this.setState({projects: filteredData})
+
+        }).catch(error => {
+          console.log(error)          
+        })
+  }
+
+
   componentDidMount() {
     this.get_token_from_storage()
   }
@@ -189,7 +209,8 @@ class App extends React.Component {
                           createToDo={(project, todoText, todoAuthor) => this.createToDo(project, todoText, todoAuthor)} />} />
             <Route path='/projects/create' element={<ProjectForm projectUsers={this.state.libraryusers}
                           createProject={(uuid, projectName, projectUsers) => this.createProject(uuid, projectName, projectUsers)} />} />
-
+            <Route path='/projects/search' element={<ProjectSearchForm 
+                          searchProject={(partedProjectName) => this.searchProject(partedProjectName)}/>} />
 
             
             <Route path="*" element={<Navigate to="/users" />}  />      

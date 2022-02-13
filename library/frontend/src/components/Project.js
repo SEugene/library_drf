@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-const ProjectItem = ({project, deleteProject}) => {
+const ProjectItem = ({project, deleteProject,searchProject}) => {
    return (
        <tr>
            <td>
@@ -23,7 +23,7 @@ const ProjectItem = ({project, deleteProject}) => {
 }
 
 
-const ProjectList = ({projects, deleteProject}) => {
+const ProjectList = ({projects, deleteProject, searchProject}) => {
     return (
         <div>
         <table className="table">
@@ -39,8 +39,11 @@ const ProjectList = ({projects, deleteProject}) => {
 
             {projects.map((project) => <ProjectItem project={project} deleteProject={deleteProject} />)}
         </table>
-
+            
             <Link to='/projects/create'>Create</Link>
+            <p></p>
+            <Link to='/projects/search'>Search for Project Name includes...</Link>
+            
         
         </div>
     )
