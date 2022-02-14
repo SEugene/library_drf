@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
-const ProjectItem = ({project}) => {
+const ProjectItem = ({project, deleteProject,searchProject}) => {
    return (
        <tr>
            <td>
@@ -13,14 +14,18 @@ const ProjectItem = ({project}) => {
            <td>
                {project.projectUsers}
            </td>
+           <td>               
+               <button onClick={()=>deleteProject(project.uuid)} type='button'>Delete</button>
+            </td>
 
        </tr>
    )
 }
 
 
-const ProjectList = ({projects}) => {
+const ProjectList = ({projects, deleteProject, searchProject}) => {
     return (
+        <div>
         <table className="table">
             <th>
                 Project name
@@ -32,8 +37,15 @@ const ProjectList = ({projects}) => {
                 Project Users
             </th>
 
-            {projects.map((project) => <ProjectItem project={project} />)}
+            {projects.map((project) => <ProjectItem project={project} deleteProject={deleteProject} />)}
         </table>
+            
+            <Link to='/projects/create'>Create</Link>
+            <p></p>
+            <Link to='/projects/search'>Search for Project Name includes...</Link>
+            
+        
+        </div>
     )
  }
  

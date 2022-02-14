@@ -5,7 +5,7 @@ from .models import LibraryUser
 class LibraryUserModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = LibraryUser
-        fields = ("url", "username", "firstname", "lastname", "email", "password")
+        fields = ("id", "url", "username", "firstname", "lastname", "email", "password")
 
     def create(self, validated_data):
         password = validated_data.pop("password", None)

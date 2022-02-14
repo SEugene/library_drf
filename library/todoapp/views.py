@@ -10,11 +10,11 @@ from library.filters import ProjectFilter, ToDoFilter
 
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 10
+    default_limit = 100
 
 
 class ToDoLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 20
+    default_limit = 120
 
 
 class ProjectViewSet(ModelViewSet):
